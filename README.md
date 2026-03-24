@@ -97,12 +97,23 @@ Three classes with distinct characteristics:
 | **chat** | 914 | "привет!", "что ты умеешь?", "спасибо", "как загрузить документ?" |
 | **followup** | 654 | "расскажи подробнее", "а почему?", "можно пример?", "объясни проще" |
 
+## Model
+
+Trained ONNX model is hosted on HuggingFace Hub:
+**[Gleckus/intent-classifier-rubert-tiny2](https://huggingface.co/Gleckus/intent-classifier-rubert-tiny2)**
+
 ## Quick Start
 
 ### Installation
 
 ```bash
-pip install onnxruntime transformers
+pip install onnxruntime transformers huggingface-hub
+```
+
+### Download model
+
+```bash
+huggingface-cli download Gleckus/intent-classifier-rubert-tiny2 --local-dir model/
 ```
 
 ### Usage
@@ -114,7 +125,7 @@ from transformers import AutoTokenizer
 
 # Load once at startup
 session = ort.InferenceSession("model/model.onnx")
-tokenizer = AutoTokenizer.from_pretrained("model/")
+tokenizer = AutoTokenizer.from_pretrained("Gleckus/intent-classifier-rubert-tiny2")
 
 LABELS = ["rag", "chat", "followup"]
 
